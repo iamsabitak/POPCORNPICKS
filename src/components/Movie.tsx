@@ -1,90 +1,96 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Card, Image, Title } from "@mantine/core";
-
-interface MState {
+interface Movie {
   Title: string;
-  Year: number;
+  Year: string;
   Poster: string;
   Type?: string;
   imdbID: string;
 }
 
-const Movie: React.FC = () => {
-  const [movies, setMovies] = useState<MState[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+const Movie: React.FC<{ query: string }> = ({ query }) => {
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const response = await fetch(
-          "http://www.omdbapi.com/?apikey=cb2dbd2d&s=doraemon"
+          `http://www.omdbapi.com/?apikey=cb2dbd2d&s=${query}`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        setMovies(data.Search);
+        if (data.Search) {
+          setMovies(data.Search);
+          setError(null);
+        } else {
+          setMovies([]);
+          setError("No movies found");
+        }
       } catch (error) {
         setError("Error fetching data. Please try again later.");
       } finally {
         setLoading(false);
       }
     };
-    fetchData();
-  }, []);
 
-  if (loading) {
-    return <div style={{ textAlign: "center" }}>Loading...</div>;
-  }
-
-  if (error) {
-    return <div style={{ textAlign: "center" }}>Error: {error}</div>;
-  }
+    if (query) {
+      fetchData();
+    } else {
+      setMovies([]);
+    }
+  }, [query]);
 
   return (
     <>
-      <Title style={{ textAlign: "center" }}>POPCORNPICKS - MOVIES</Title>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "20px",
-          justifyContent: "center",
-        }}
-      >
-        {movies.map((item, index) => {
-          const { Title, Type, Year, Poster, imdbID } = item;
-          return (
-            <Card
-              key={imdbID || index}
-              style={{
-                width: "250px",
-                textAlign: "center",
-                margin: "10px",
-                backgroundColor: "#151313",
-                borderRadius: "10px",
-              }}
-            >
-              <Image
-                src={Poster}
-                alt={Title}
+      {loading && <div>Loading...</div>}
+      {error && <div>Error: {error}</div>}
+      {movies.length > 0 && (
+        <>
+          <Title style={{ textAlign: "center" }}>POPCORNPICKS - MOVIES</Title>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "20px",
+              justifyContent: "center",
+            }}
+          >
+            {movies.map((movie) => (
+              <Card
+                key={movie.imdbID}
                 style={{
-                  marginBottom: "10px",
                   width: "250px",
-                  height: "300px", // Set a fixed height for the image
-                  objectFit: "cover", // Maintain aspect ratio while covering the area
-                  borderTopRightRadius: "10px",
-                  borderTopLeftRadius: "10px",
+                  textAlign: "center",
+                  margin: "10px",
+                  backgroundColor: "#151313",
+                  borderRadius: "10px",
                 }}
-              />
-              <h3>{Title}</h3>
-              {Type && <p>{Type}</p>}
-              <p>{Year}</p>
-            </Card>
-          );
-        })}
-      </div>
+              >
+                <Image
+                  src={movie.Poster}
+                  alt={movie.Title}
+                  style={{
+                    marginBottom: "10px",
+                    width: "250px",
+                    height: "300px",
+                    objectFit: "cover",
+                    borderTopRightRadius: "10px",
+                    borderTopLeftRadius: "10px",
+                  }}
+                />
+                <h3>{movie.Title}</h3>
+                {movie.Type && <p>{movie.Type}</p>}
+                <p>{movie.Year}</p>
+              </Card>
+            ))}
+          </div>
+        </>
+      )}
     </>
   );
 };
