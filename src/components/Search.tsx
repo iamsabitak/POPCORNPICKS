@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { TextInput } from "@mantine/core";
 
 const Search: React.FC = () => {
   const [query, setQuery] = useState<string>("pokemon");
+  const inputEl = useRef(null);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   };
@@ -13,6 +14,8 @@ const Search: React.FC = () => {
   return (
     <form onSubmit={handleSubmit}>
       <TextInput
+        ref={inputEl}
+        type="text"
         placeholder="Search your favorite movie..."
         onChange={handleChange}
         value={query}
