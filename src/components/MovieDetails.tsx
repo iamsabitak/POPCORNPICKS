@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { Button, Card, Image, Title } from "@mantine/core";
 import { useParams } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 interface MovieDetail {
   Title: string;
   Year: string;
@@ -11,7 +12,7 @@ interface MovieDetail {
 
 const MovieDetails: React.FC = () => {
   const [movie, setMovie] = useState<MovieDetail | null>(null);
-  const { imdbID } = useParams<string>();
+  const { imdbID } = useParams<{ imdbID: string }>();
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -39,11 +40,50 @@ const MovieDetails: React.FC = () => {
   }
 
   return (
-    <div>
-      <h1>{movie.Title}</h1>
-      <img src={movie.Poster} alt={movie.Title} />
-      <p>Year: {movie.Year}</p>
-      {movie.Type && <p>Type: {movie.Type}</p>}
+    <div
+      style={{ display: "flex", justifyContent: "center", marginTop: "2rem" }}
+    >
+      <Card
+        style={{
+          width: "250px",
+          textAlign: "center",
+          margin: "10px",
+          backgroundColor: "#151313",
+          borderRadius: "10px",
+        }}
+      >
+        <Image
+          src={movie.Poster}
+          alt={movie.Title}
+          style={{
+            marginBottom: "10px",
+            width: "250px",
+            height: "250px",
+            objectFit: "cover",
+            borderTopRightRadius: "10px",
+            borderTopLeftRadius: "10px",
+          }}
+        />
+        <Title>{movie.Title}</Title>
+        <p>Year: {movie.Year}</p>
+        {movie.Type && <p>Type: {movie.Type}</p>}
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <Button
+            style={{
+              color: "#fff",
+              cursor: "pointer",
+              border: "1px solid #08e408",
+              backgroundColor: "#08e408",
+              borderRadius: "4px",
+              height: "2rem",
+              width: "5rem",
+              marginBottom: "1rem",
+            }}
+          >
+            Go Back
+          </Button>
+        </Link>
+      </Card>
     </div>
   );
 };
