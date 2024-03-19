@@ -60,7 +60,9 @@ const Movie: React.FC<{ query: string }> = ({ query }) => {
       )}
       {movies.length > 0 && (
         <>
-          <Title style={{ textAlign: "center" }}>POPCORNPICKS - MOVIES</Title>
+          <Title style={{ textAlign: "center", color: "#08e408" }}>
+            POPCORNPICKS - MOVIES
+          </Title>
           <div
             style={{
               display: "flex",
