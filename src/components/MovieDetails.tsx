@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Image, Title } from "@mantine/core";
+import { Button, Card, Image} from "@mantine/core";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 interface MovieDetail {
@@ -64,7 +64,7 @@ const MovieDetails: React.FC = () => {
             borderTopLeftRadius: "10px",
           }}
         />
-        <Title>{movie.Title}</Title>
+        <h3>{movie.Title}</h3>
         <p>Year: {movie.Year}</p>
         {movie.Type && <p>Type: {movie.Type}</p>}
         <Link to="/" style={{ textDecoration: "none" }}>
