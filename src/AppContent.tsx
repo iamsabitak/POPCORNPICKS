@@ -12,7 +12,7 @@ const AppContent: React.FC = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/movie" element={<Movie />} />
+          <Route path="/movie" element={<Movie query="pokemon" />} />
         </Routes>
       </Router>
     </>
