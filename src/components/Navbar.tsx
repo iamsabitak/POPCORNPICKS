@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
           component={Link}
           style={{
             textDecoration: "none",
-            color: "#ffa500",
+            color: "#08e408",
             fontSize: "18px",
             fontWeight: "bold",
           }}
