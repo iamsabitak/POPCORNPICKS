@@ -3,12 +3,13 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Movie from "./components/Movie";
 import Home from "./components/Home";
+import Navbar from "./components/Navbar";
 
 const AppContent: React.FC = () => {
   return (
     <>
-      <h1>POPCORNPICKS - AppContent</h1>
       <Router>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/movie" element={<Movie />} />
