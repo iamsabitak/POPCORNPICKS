@@ -47,8 +47,16 @@ const Movie: React.FC<{ query: string }> = ({ query }) => {
 
   return (
     <>
-      {loading && <div>Loading...</div>}
-      {error && <div>Error: {error}</div>}
+      {loading && (
+        <div style={{ marginLeft: "35rem", marginTop: "10rem" }}>
+          Loading...
+        </div>
+      )}
+      {error && (
+        <div style={{ marginLeft: "30rem", marginTop: "10rem" }}>
+          Error: {error}
+        </div>
+      )}
       {movies.length > 0 && (
         <>
           <Title style={{ textAlign: "center" }}>POPCORNPICKS - MOVIES</Title>
