@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Card, Image, Title } from "@mantine/core";
+import { Button, Card, Image, Title } from "@mantine/core";
+import { Link } from "react-router-dom";
 interface Movie {
   Title: string;
   Year: string;
@@ -48,7 +49,7 @@ const Movie: React.FC<{ query: string }> = ({ query }) => {
   return (
     <>
       {loading && (
-        <div style={{ marginLeft: "35rem", marginTop: "10rem" }}>
+        <div style={{ marginLeft: "38rem", marginTop: "10rem" }}>
           Loading...
         </div>
       )}
@@ -69,32 +70,49 @@ const Movie: React.FC<{ query: string }> = ({ query }) => {
             }}
           >
             {movies.map((movie) => (
-              <Card
-                key={movie.imdbID}
-                style={{
-                  width: "250px",
-                  textAlign: "center",
-                  margin: "10px",
-                  backgroundColor: "#151313",
-                  borderRadius: "10px",
-                }}
-              >
-                <Image
-                  src={movie.Poster}
-                  alt={movie.Title}
+              <div key={movie.imdbID}>
+                <Card
                   style={{
-                    marginBottom: "10px",
                     width: "250px",
-                    height: "300px",
-                    objectFit: "cover",
-                    borderTopRightRadius: "10px",
-                    borderTopLeftRadius: "10px",
+                    textAlign: "center",
+                    margin: "10px",
+                    backgroundColor: "#151313",
+                    borderRadius: "10px",
                   }}
-                />
-                <h3>{movie.Title}</h3>
-                {movie.Type && <p>{movie.Type}</p>}
-                <p>{movie.Year}</p>
-              </Card>
+                >
+                  <Image
+                    src={movie.Poster}
+                    alt={movie.Title}
+                    style={{
+                      marginBottom: "10px",
+                      width: "250px",
+                      height: "300px",
+                      objectFit: "cover",
+                      borderTopRightRadius: "10px",
+                      borderTopLeftRadius: "10px",
+                    }}
+                  />
+                  <h3>{movie.Title}</h3>
+                  {movie.Type && <p>{movie.Type}</p>}
+                  <p>{movie.Year}</p>
+                  <Link key={movie.imdbID} to={`/movies/${movie.imdbID}`}>
+                    <Button
+                      style={{
+                        color: "#fff",
+                        cursor: "pointer",
+                        border: "1px solid #08e408",
+                        backgroundColor: "#08e408",
+                        borderRadius: "4px",
+                        height: "2rem",
+                        width: "5rem",
+                        marginBottom: "1rem",
+                      }}
+                    >
+                      Details
+                    </Button>
+                  </Link>
+                </Card>
+              </div>
             ))}
           </div>
         </>
