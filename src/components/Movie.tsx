@@ -54,7 +54,7 @@ const Movie: React.FC<{ query: string }> = ({ query }) => {
         </div>
       )}
       {error && (
-        <div style={{ marginLeft: "30rem", marginTop: "10rem" }}>
+        <div style={{ marginLeft: "38rem", marginTop: "10rem" }}>
           Error: {error}
         </div>
       )}
