@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { NavLink } from "@mantine/core";
+import Search from "./Search";
 
 const Navbar: React.FC = () => {
   return (
@@ -26,6 +27,7 @@ const Navbar: React.FC = () => {
             fontWeight: "bold",
           }}
         />
+        <Search />
         <ul
           style={{
             listStyle: "none",
