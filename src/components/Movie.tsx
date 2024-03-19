@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Card, Image, Title } from "@mantine/core";
 
 interface MState {
   Title: string;
@@ -34,27 +35,56 @@ const Movie: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div style={{ textAlign: "center" }}>Loading...</div>;
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div style={{ textAlign: "center" }}>Error: {error}</div>;
   }
 
   return (
     <>
-      <h1>POPCORNPICKS - MOVIE</h1>
-      {movies.map((item, index) => {
-        const { Title, Type, Year, Poster, imdbID } = item;
-        return (
-          <div key={imdbID || index}>
-            <img src={Poster} alt={Title} />
-            <li>{Title}</li>
-            {Type && <li>{Type}</li>}
-            <li>{Year}</li>
-          </div>
-        );
-      })}
+      <Title style={{ textAlign: "center" }}>POPCORNPICKS - MOVIES</Title>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "20px",
+          justifyContent: "center",
+        }}
+      >
+        {movies.map((item, index) => {
+          const { Title, Type, Year, Poster, imdbID } = item;
+          return (
+            <Card
+              key={imdbID || index}
+              style={{
+                width: "250px",
+                textAlign: "center",
+                margin: "10px",
+                backgroundColor: "#151313",
+                borderRadius: "10px",
+              }}
+            >
+              <Image
+                src={Poster}
+                alt={Title}
+                style={{
+                  marginBottom: "10px",
+                  width: "250px",
+                  height: "300px", // Set a fixed height for the image
+                  objectFit: "cover", // Maintain aspect ratio while covering the area
+                  borderTopRightRadius: "10px",
+                  borderTopLeftRadius: "10px",
+                }}
+              />
+              <h3>{Title}</h3>
+              {Type && <p>{Type}</p>}
+              <p>{Year}</p>
+            </Card>
+          );
+        })}
+      </div>
     </>
   );
 };
