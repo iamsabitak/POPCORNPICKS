@@ -95,8 +95,6 @@ const Movie: React.FC<{ query: string }> = ({ query }) => {
                     }}
                   />
                   <h3>{movie.Title}</h3>
-                  {movie.Type && <p>{movie.Type}</p>}
-                  <p>{movie.Year}</p>
                   <Link key={movie.imdbID} to={`/movies/${movie.imdbID}`}>
                     <Button
                       style={{
