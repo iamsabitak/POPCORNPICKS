@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
           style={{
             textDecoration: "none",
             color: "#08e408",
-            fontSize: "18px",
+            fontSize: "25px",
             fontWeight: "bold",
           }}
         />
