@@ -27,6 +27,7 @@ const Movie: React.FC<{ query: string }> = ({ query }) => {
         const data = await response.json();
         if (data.Search) {
           setMovies(data.Search);
+          console.log(data.Search);
           setError(null);
         } else {
           setMovies([]);
@@ -84,7 +85,11 @@ const Movie: React.FC<{ query: string }> = ({ query }) => {
                   }}
                 >
                   <Image
-                    src={movie.Poster}
+                    src={
+                      movie.Poster === "N/A"
+                        ? "https://i.pinimg.com/originals/a0/32/26/a032267e74bb6f550adbd7821991ae70.jpg"
+                        : movie.Poster
+                    }
                     alt={movieTitle}
                     style={{
                       marginBottom: "10px",
