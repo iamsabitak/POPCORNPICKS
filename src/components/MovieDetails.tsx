@@ -64,7 +64,7 @@ const MovieDetails: React.FC = () => {
             borderTopLeftRadius: "10px",
           }}
         />
-        <h3>{movie.Title}</h3>
+        {movie.Title.length > 15 ? `${movie.Title.substring(0, 16)}...` : movie.Title}
         <p>Year: {movie.Year}</p>
         {movie.Type && <p>Type: {movie.Type}</p>}
         <Link to="/" style={{ textDecoration: "none" }}>
