@@ -57,7 +57,11 @@ const MovieDetails: React.FC = () => {
           }}
         >
           <Image
-            src={movie.Poster}
+            src={
+              movie.Poster === "N/A"
+                ? "https://i.pinimg.com/originals/a0/32/26/a032267e74bb6f550adbd7821991ae70.jpg"
+                : movie.Poster
+            }
             alt={movie.Title}
             style={{
               marginBottom: "10px",
