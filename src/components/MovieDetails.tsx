@@ -22,7 +22,7 @@ const MovieDetails: React.FC = () => {
       }
       const data = await response.json();
       setMoviesDetails(data);
-      console.log("rendered");
+      console.log("rendered-detail");
     } catch (error) {
       setError("Error fetching movie details. Please try again later.");
       console.error("Error fetching movie details:", error);
