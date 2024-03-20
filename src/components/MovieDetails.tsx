@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Image } from "@mantine/core";
+import { Button, Card, Image, Title } from "@mantine/core";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 interface MovieDetail {
@@ -40,55 +40,60 @@ const MovieDetails: React.FC = () => {
   }
 
   return (
-    <div
-      style={{ display: "flex", justifyContent: "center", marginTop: "2rem" }}
-    >
-      <Card
-        style={{
-          width: "250px",
-          textAlign: "center",
-          margin: "10px",
-          backgroundColor: "#151313",
-          borderRadius: "10px",
-        }}
+    <>
+      <Title style={{ textAlign: "center", color: "#08e408" }}>
+        MOVIES-DETAILS
+      </Title>
+      <div
+        style={{ display: "flex", justifyContent: "center", marginTop: "2rem" }}
       >
-        <Image
-          src={movie.Poster}
-          alt={movie.Title}
+        <Card
           style={{
-            marginBottom: "10px",
             width: "250px",
-            height: "250px",
-            objectFit: "cover",
-            borderTopRightRadius: "10px",
-            borderTopLeftRadius: "10px",
+            textAlign: "center",
+            margin: "10px",
+            backgroundColor: "#151313",
+            borderRadius: "10px",
           }}
-        />
-        <h3>
-          {movie.Title.length > 15
-            ? `${movie.Title.substring(0, 16)}...`
-            : movie.Title}
-        </h3>
-        <h4>Year: {movie.Year}</h4>
-        {movie.Type && <h4>Type: {movie.Type}</h4>}
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <Button
+        >
+          <Image
+            src={movie.Poster}
+            alt={movie.Title}
             style={{
-              color: "#fff",
-              cursor: "pointer",
-              border: "1px solid #08e408",
-              backgroundColor: "#08e408",
-              borderRadius: "4px",
-              height: "2rem",
-              width: "5rem",
-              marginBottom: "1rem",
+              marginBottom: "10px",
+              width: "250px",
+              height: "250px",
+              objectFit: "cover",
+              borderTopRightRadius: "10px",
+              borderTopLeftRadius: "10px",
             }}
-          >
-            Go Back
-          </Button>
-        </Link>
-      </Card>
-    </div>
+          />
+          <h3>
+            {movie.Title.length > 15
+              ? `${movie.Title.substring(0, 16)}...`
+              : movie.Title}
+          </h3>
+          <h4>Year: {movie.Year}</h4>
+          {movie.Type && <h4>Type: {movie.Type}</h4>}
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <Button
+              style={{
+                color: "#fff",
+                cursor: "pointer",
+                border: "1px solid #08e408",
+                backgroundColor: "#08e408",
+                borderRadius: "4px",
+                height: "2rem",
+                width: "5rem",
+                marginBottom: "1rem",
+              }}
+            >
+              Go Back
+            </Button>
+          </Link>
+        </Card>
+      </div>
+    </>
   );
 };
 
