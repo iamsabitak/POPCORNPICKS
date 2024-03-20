@@ -21,19 +21,15 @@ export interface Movie {
   imdbID: string;
 }
 
-const initialMovieState: Movie[] = [];
-const initialLoadingState: boolean = false;
-const initialErrorState: string | null = null;
-
 const MovieContext = createContext<MovieContextType | undefined>(undefined);
 
 export const MovieProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [query, setQuery] = useState<string>("pokemon");
-  const [movies, setMovies] = useState<Movie[]>(initialMovieState);
-  const [loading, setLoading] = useState<boolean>(initialLoadingState);
-  const [error, setError] = useState<string | null>(initialErrorState);
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
   const [moviesDetails, setMoviesDetails] = useState<Movie | null>(null);
 
   const contextValue: MovieContextType = {
