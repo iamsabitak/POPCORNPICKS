@@ -1,9 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { TextInput } from "@mantine/core";
 
+import { useMovieContext } from "../usecontex/useMovieContext";
+
 const Search: React.FC = () => {
-  const [query, setQuery] = useState<string>("pokemon");
-  const inputEl = useRef(null);
+  const { query, setQuery } = useMovieContext();
+  const inputEl = useRef<HTMLInputElement>(null);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   };
