@@ -1,45 +1,58 @@
-import React, { useEffect } from "react";
-
-import { Title } from "@mantine/core";
-
+import React, { useEffect, useCallback, useState } from "react";
+import { Title, Loader } from "@mantine/core";
 import { useParams } from "react-router-dom";
-
 import { useMovieContext } from "../usecontext/useMovieContext";
 import DetailsCard from "./DeatilsCard";
 
 const MovieDetails: React.FC = () => {
-  const { moviesDetails, setMoviesDetails } = useMovieContext();
+  const { setMoviesDetails } = useMovieContext();
   const { imdbID } = useParams<{ imdbID: string }>();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchMovieDetails = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetch(
+        `http://www.omdbapi.com/?apikey=cb2dbd2d&i=${imdbID}`
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      setMoviesDetails(data);
+      console.log("rendered");
+    } catch (error) {
+      setError("Error fetching movie details. Please try again later.");
+      console.error("Error fetching movie details:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [imdbID, setMoviesDetails]);
 
   useEffect(() => {
-    const fetchMovieDetails = async () => {
-      try {
-        const response = await fetch(
-          `http://www.omdbapi.com/?apikey=cb2dbd2d&i=${imdbID}`
-        );
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setMoviesDetails(data);
-      } catch (error) {
-        console.error("Error fetching movie details:", error);
-      }
-    };
-
     fetchMovieDetails();
-  }, [imdbID, setMoviesDetails, moviesDetails]);
+  }, [fetchMovieDetails]);
 
   return (
     <>
       <Title style={{ textAlign: "center", color: "#08e408" }}>
         MOVIES-DETAILS
       </Title>
-      <div
-        style={{ display: "flex", justifyContent: "center", marginTop: "2rem" }}
-      >
-        <DetailsCard />
-      </div>
+      {loading && <Loader />}
+      {error && <div>Error: {error}</div>}
+      {!loading && !error && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "2rem",
+          }}
+        >
+          <DetailsCard />
+        </div>
+      )}
     </>
   );
 };
