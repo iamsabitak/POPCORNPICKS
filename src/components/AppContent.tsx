@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import Movie from "./components/Movie";
+import Movie from "./Movie";
 
-import Navbar from "./components/Navbar";
-import MovieDetails from "./components/MovieDetails";
+import Navbar from "./Navbar";
+import MovieDetails from "./MovieDetails";
 
 const AppContent: React.FC = () => {
   return (

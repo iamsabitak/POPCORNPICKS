@@ -1,5 +1,5 @@
 import React from "react";
-import AppContent from "./AppContent";
+import AppContent from "./components/AppContent";
 import { MantineProvider } from "@mantine/core";
 
 const App: React.FC = () => {
