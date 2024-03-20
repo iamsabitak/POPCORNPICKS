@@ -9,6 +9,7 @@ import MovieCard from "./Moviecard";
 const Movie: React.FC<{ query: string }> = () => {
   const { query, setMovies, loading, setLoading, error, setError } =
     useMovieContext();
+
   React.useEffect(() => {
     const fetchData = async () => {
       setLoading(true);

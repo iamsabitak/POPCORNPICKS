@@ -3,6 +3,7 @@ import React from "react";
 import { Button, Card, Image } from "@mantine/core";
 
 import { Link } from "react-router-dom";
+
 import { useMovieContext } from "../usecontext/useMovieContext";
 
 const DetailsCard: React.FC = () => {
