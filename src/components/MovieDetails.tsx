@@ -1,17 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Button, Card, Image, Title } from "@mantine/core";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-interface MovieDetail {
-  Title: string;
-  Year: string;
-  Poster: string;
-  Type?: string;
-  imdbID: string;
-}
+import { useMovieContext } from "../usecontex/useMovieContext";
 
 const MovieDetails: React.FC = () => {
-  const [movie, setMovie] = useState<MovieDetail | null>(null);
+  const { moviesDetails, setMoviesDetails } = useMovieContext();
   const { imdbID } = useParams<{ imdbID: string }>();
 
   useEffect(() => {
@@ -24,16 +18,16 @@ const MovieDetails: React.FC = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        setMovie(data);
+        setMoviesDetails(data);
       } catch (error) {
         console.error("Error fetching movie details:", error);
       }
     };
 
     fetchMovieDetails();
-  }, [imdbID]);
+  }, [imdbID, setMoviesDetails, moviesDetails]);
 
-  if (!movie) {
+  if (!moviesDetails) {
     return (
       <div style={{ textAlign: "center", marginTop: "10rem" }}>Loading...</div>
     );
@@ -58,11 +52,11 @@ const MovieDetails: React.FC = () => {
         >
           <Image
             src={
-              movie.Poster === "N/A"
+              moviesDetails.Poster === "N/A"
                 ? "https://i.pinimg.com/originals/a0/32/26/a032267e74bb6f550adbd7821991ae70.jpg"
-                : movie.Poster
+                : moviesDetails.Poster
             }
-            alt={movie.Title}
+            alt={moviesDetails.Title}
             style={{
               marginBottom: "10px",
               width: "250px",
@@ -73,12 +67,12 @@ const MovieDetails: React.FC = () => {
             }}
           />
           <h3>
-            {movie.Title.length > 15
-              ? `${movie.Title.substring(0, 16)}...`
-              : movie.Title}
+            {moviesDetails.Title.length > 15
+              ? `${moviesDetails.Title.substring(0, 16)}...`
+              : moviesDetails.Title}
           </h3>
-          <h4>Year: {movie.Year}</h4>
-          {movie.Type && <h4>Type: {movie.Type}</h4>}
+          <h4>Year: {moviesDetails.Year}</h4>
+          {moviesDetails.Type && <h4>Type: {moviesDetails.Type}</h4>}
           <Link to="/" style={{ textDecoration: "none" }}>
             <Button
               style={{
