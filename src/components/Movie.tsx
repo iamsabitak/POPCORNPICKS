@@ -49,20 +49,20 @@ const Movie: React.FC<{ query: string }> = ({ query }) => {
 
   return (
     <>
+      <Title style={{ textAlign: "center", color: "#08e408" }}>
+        POPCORNPICKS - MOVIES
+      </Title>
       {loading && (
-        <div style={{ marginLeft: "38rem", marginTop: "10rem" }}>
+        <div style={{ textAlign: "center", marginTop: "10rem" }}>
           Loading...
         </div>
       )}
       {error && (
-        <div style={{ marginLeft: "38rem", marginTop: "10rem" }}>
+        <div style={{ textAlign: "center", marginTop: "10rem" }}>
           Error: {error}
         </div>
       )}
       <>
-        <Title style={{ textAlign: "center", color: "#08e408" }}>
-          POPCORNPICKS - MOVIES
-        </Title>
         <div
           style={{
             display: "flex",
