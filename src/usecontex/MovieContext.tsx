@@ -1,5 +1,6 @@
 import React, { createContext, ReactNode, useState } from "react";
-interface MovieContextType {
+
+export interface MovieContextType {
   query: string;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
 }
