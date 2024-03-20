@@ -35,7 +35,7 @@ const MovieDetails: React.FC = () => {
 
   if (!movie) {
     return (
-      <div style={{ marginLeft: "38rem", marginTop: "10rem" }}>Loading...</div>
+      <div style={{ textAlign: "center", marginTop: "10rem" }}>Loading...</div>
     );
   }
 
