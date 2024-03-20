@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Title } from "@mantine/core";
 
@@ -10,7 +10,7 @@ const Movie: React.FC<{ query: string }> = () => {
   const { query, setMovies, loading, setLoading, error, setError } =
     useMovieContext();
 
-  React.useEffect(() => {
+ useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
@@ -23,7 +23,7 @@ const Movie: React.FC<{ query: string }> = () => {
         const data = await response.json();
         if (data.Search) {
           setMovies(data.Search);
-          console.log(data.Search);
+          console.log("rendered-movie");
           setError(null);
         } else {
           setMovies([]);
