@@ -1,9 +1,9 @@
 import React from "react";
 
-const DetailsCard:React.FC=()=>{
+const MovieCard:React.FC=()=>{
     return(
         <>
         </>
     )
 }
-export default DetailsCard
+export default MovieCard
