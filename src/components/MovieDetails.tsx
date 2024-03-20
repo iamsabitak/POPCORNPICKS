@@ -4,7 +4,7 @@ import { Title } from "@mantine/core";
 
 import { useParams } from "react-router-dom";
 
-import { useMovieContext } from "../usecontex/useMovieContext";
+import { useMovieContext } from "../usecontext/useMovieContext";
 import DetailsCard from "./DeatilsCard";
 
 const MovieDetails: React.FC = () => {

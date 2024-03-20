@@ -5,7 +5,7 @@ import Movie from "./Movie";
 
 import Navbar from "./Navbar";
 import MovieDetails from "./MovieDetails";
-import { useMovieContext } from "../usecontex/useMovieContext";
+import { useMovieContext } from "../usecontext/useMovieContext";
 
 const AppContent: React.FC = () => {
   const { query } = useMovieContext();

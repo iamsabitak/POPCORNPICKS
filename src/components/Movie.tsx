@@ -2,7 +2,7 @@ import React from "react";
 
 import { Title } from "@mantine/core";
 
-import { useMovieContext } from "../usecontex/useMovieContext";
+import { useMovieContext } from "../usecontext/useMovieContext";
 
 import MovieCard from "./Moviecard";
 
@@ -58,7 +58,7 @@ const Movie: React.FC<{ query: string }> = () => {
         </div>
       )}
       <>
-        <MovieCard/>
+        <MovieCard />
       </>
     </>
   );

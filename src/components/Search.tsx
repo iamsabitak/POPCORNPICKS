@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { TextInput } from "@mantine/core";
 
-import { useMovieContext } from "../usecontex/useMovieContext";
+import { useMovieContext } from "../usecontext/useMovieContext";
 
 const Search: React.FC = () => {
   const { query, setQuery } = useMovieContext();

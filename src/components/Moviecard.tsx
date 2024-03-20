@@ -2,7 +2,7 @@ import React from "react";
 
 import { Button, Card, Image } from "@mantine/core";
 
-import { useMovieContext } from "../usecontex/useMovieContext";
+import { useMovieContext } from "../usecontext/useMovieContext";
 
 import { Link } from "react-router-dom";
 
