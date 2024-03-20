@@ -1,19 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Card, Image, Title } from "@mantine/core";
 import { Link } from "react-router-dom";
-interface Movie {
-  Title: string;
-  Year: string;
-  Poster: string;
-  Type?: string;
-  imdbID: string;
-}
+import { useMovieContext } from "../usecontex/useMovieContext";
 
-const Movie: React.FC<{ query: string }> = ({ query }) => {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-
+const Movie: React.FC<{ query: string }> = () => {
+  const { query, movies, setMovies, loading, setLoading, error, setError } =
+    useMovieContext();
   React.useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -45,7 +37,7 @@ const Movie: React.FC<{ query: string }> = ({ query }) => {
     } else {
       setMovies([]);
     }
-  }, [query]);
+  }, [query, setError, setLoading, setMovies]);
 
   return (
     <>
